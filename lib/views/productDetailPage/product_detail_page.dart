@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_assignment/models/product_list_entity.dart';
 import 'package:flutter_assignment/utils/application_ui_manager.dart';
@@ -21,17 +22,32 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     _uiManager = ApplicationUIManager(context);
 
     return Scaffold(
-        backgroundColor: Colors.grey[200],
-        appBar: AppBarUtil.instance.customAppBar(context, widget.productListModel.name),
+        appBar: AppBarUtil.instance
+            .customAppBar(context, widget.productListModel.name),
         body: SingleChildScrollView(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            buildProductTitleAndDis(context),
-            SizedBox(
-              height: 20,
+            Container(
+              padding: EdgeInsets.only(
+                  left: _uiManager.width(context, 80),
+                  right: _uiManager.width(context, 80),
+                  top: 5),
+              child: CachedNetworkImage(
+                fit: BoxFit.fill,
+                imageUrl: widget.productListModel.imageURL,
+                placeholder: (context, url) => Container(),
+                errorWidget: (context, url, error) => Container(
+                  color: Colors.grey[300],
+                  child: Icon(Icons.error_outline),
+                  height: _uiManager.height(context, 230),
+                  width: _uiManager.width(context, 136),
+                ),
+              ),
             ),
+            buildProductTitleAndDis(context),
+            divider(context),
             Container(
               color: Colors.white,
               height: _uiManager.height(context, 50),
@@ -50,9 +66,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                         fontWeight: FontWeight.w400)),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            divider(context),
             Container(
               color: Colors.white,
               height: _uiManager.height(context, 50),
@@ -80,13 +94,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            divider(context),
             buildSizeView(context),
-            SizedBox(
-              height: 20,
-            ),
+            divider(context),
             buildProductDetailsView(context)
           ],
         )));
@@ -432,4 +442,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             fontWeight: FontWeight.w400));
   }
 
+  Widget divider(BuildContext context) {
+    return Container(
+      color: Colors.grey[200],
+      height: 20,
+    );
+  }
 }

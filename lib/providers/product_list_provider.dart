@@ -30,5 +30,4 @@ class ProductListProvider with ChangeNotifier {
       notifyListeners();
     }
   }
-
 }
