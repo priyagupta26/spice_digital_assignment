@@ -75,7 +75,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    Icon(Icons.refresh),
+                    Icon(Icons.autorenew),
                     Padding(
                       padding: EdgeInsets.only(
                         left: _uiManager.width(context, 10),

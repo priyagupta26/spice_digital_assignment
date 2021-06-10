@@ -30,6 +30,7 @@ class _ProductListState extends State<ProductListPage> {
       body: SingleChildScrollView(
         child: buildBody(context),
       ),
+      bottomNavigationBar: buildSortAndFilterView(context),
     );
   }
 
@@ -76,6 +77,65 @@ class _ProductListState extends State<ProductListPage> {
         ],
       ),
     );
+  }
+//sort and filter widget
+
+  Widget buildSortAndFilterView(BuildContext context){
+    return Container(
+      padding: EdgeInsets.only(left: 50, right: 50),
+      height: _uiManager.height(context, 50),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          InkWell(
+            onTap: (){
+              print("sort button clicked");
+            },
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.arrow_downward, color: Colors.grey,),
+                Padding(
+                  padding:  EdgeInsets.only(left: _uiManager.width(context, 8)),
+                  child: Text("SORT",
+                      maxLines: 1,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.workSans(
+                          fontSize: _uiManager.size(context, 16),
+                          color: Colors.grey,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w600)),
+                ),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: (){
+              print("filter button clicked");
+            },
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.local_bar, color: Colors.grey,),
+                Padding(
+                  padding:  EdgeInsets.only(left: _uiManager.width(context, 8)),
+                  child: Text("FILTER",
+                      maxLines: 1,
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      style: GoogleFonts.workSans(
+                          fontSize: _uiManager.size(context, 16),
+                          color: Colors.grey,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w600)),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+
   }
 
   // product grid widget
